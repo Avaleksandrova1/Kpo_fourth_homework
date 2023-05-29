@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/user_service}
+    driverClassName: org.postgresql.Driver
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        order_by.default_null_ordering: last
+        format_sql: true
+        default_schema: public
+    open-in-view: false
+    show-sql: true
+    generate-ddl: true
+  jackson:
+    default-property-inclusion: non_null
+    deserialization:
+      fail-on-unknown-properties: false
+  session:
+    jdbc:
+      initialize-schema: always
+
+server:
+  port: 8081
+
+microservices:
+  task-path: 'http://localhost:8081/task'
